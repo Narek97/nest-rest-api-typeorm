@@ -6,11 +6,13 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
 } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { MovieEntity } from './entities/movie.entity';
 import { MovieDto } from './dto/movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { StringToLowercasePipe } from '../common/pipes/string-to-lowercase.pipe';
 
 @Controller('movie')
 export class MovieController {
@@ -28,7 +30,6 @@ export class MovieController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<MovieEntity> {
-    console.log(id, 'id');
     return this.movieService.findOne(Number(id));
   }
 
@@ -43,5 +44,11 @@ export class MovieController {
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<MovieEntity> {
     return this.movieService.delete(Number(id));
+  }
+
+  @UsePipes(StringToLowercasePipe)
+  @Post('/pipe')
+  async testPipe(@Body() text: string) {
+    return text;
   }
 }
