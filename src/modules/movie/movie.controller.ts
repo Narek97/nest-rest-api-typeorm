@@ -12,7 +12,7 @@ import { MovieService } from './movie.service';
 import { MovieEntity } from './entities/movie.entity';
 import { MovieDto } from './dto/movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
-import { StringToLowercasePipe } from '../common/pipes/string-to-lowercase.pipe';
+import { StringToLowercasePipe } from '../../common/pipes/string-to-lowercase.pipe';
 import {
   ApiBody,
   ApiHeader,

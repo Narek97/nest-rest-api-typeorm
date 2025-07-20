@@ -5,5 +5,5 @@ export class CreateActorDto {
   name: string;
 
   @IsNotEmpty()
-  surName: string;
+  surname: string;
 }

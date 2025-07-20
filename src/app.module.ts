@@ -2,12 +2,12 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { getTypeOrmConfig } from './config/typeorm.config';
-import { MovieModule } from './movie/movie.module';
-import { ReviewModule } from './review/review.module';
-import { ActorModule } from './actor/actor.module';
+import { ConfigModule } from '@nestjs/config';
+import { MovieModule } from './modules/movie/movie.module';
+import { ReviewModule } from './modules/review/review.module';
+import { ActorModule } from './modules/actor/actor.module';
 import { LoggerMiddleware } from './common/middlewares/logger.middleware';
+import { dataSourceOptions } from './db/datasource';
 
 @Module({
   imports: [
@@ -18,11 +18,7 @@ import { LoggerMiddleware } from './common/middlewares/logger.middleware';
       cache: true,
       expandVariables: true,
     }),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: getTypeOrmConfig,
-      inject: [ConfigService],
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     MovieModule,
     ReviewModule,
     ActorModule,

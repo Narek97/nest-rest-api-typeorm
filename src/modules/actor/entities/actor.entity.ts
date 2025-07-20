@@ -2,7 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -25,7 +24,7 @@ export class ActorEntity {
     type: 'varchar',
     length: 255,
   })
-  surName: string;
+  surname: string;
 
   @ManyToMany(() => MovieEntity, (movie) => movie.actors)
   @JoinTable({
